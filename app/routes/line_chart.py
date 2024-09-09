@@ -1,35 +1,34 @@
 from flask import render_template
 from app import app
+from app.utils import load_data, generate_colors
 from quickchart import QuickChart
 
 @app.route('/line_chart')
 def line_chart():
+    table = load_data("dataset2.csv")
+    labels = ['sisa lama', 'masuk', 'putus', 'sisa baru']
+    
+    datasets = []
+    for perkara in table['PERKARA']:
+        data = table[table['PERKARA'] == perkara][labels].values.flatten().tolist()
+        datasets.append({
+            "label": perkara,
+            "data": data,
+            "fill": False,
+            "borderColor": generate_colors(1)[0]
+        })
+
     qc = QuickChart()
     qc.width = 500
     qc.height = 300
     qc.version = '2.9.4'
-
-    # Config can be set as a string or as a nested dict
-    qc.config = """{
-      type: 'line',
-      data: {
-        labels: ['January', 'February', 'March', 'April', 'May'],
-        datasets: [
-          {
-            label: 'Dogs',
-            data: [50, 60, 70, 180, 190],
-            fill: false,
-            borderColor: 'blue',
-          },
-          {
-            label: 'Cats',
-            data: [100, 200, 300, 400, 500],
-            fill: false,
-            borderColor: 'green',
-          },
-        ],
-      },
-    }"""
+    qc.config = {
+        "type": "line",
+        "data": {
+            "labels": labels,
+            "datasets": datasets
+        }
+    }
 
     chart_url = qc.get_url()
     return f'''
