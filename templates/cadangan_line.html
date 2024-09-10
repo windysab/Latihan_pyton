@@ -15,18 +15,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 150vh;
+            height: 100vh;
             margin: 0;
         }
 
         .container {
             text-align: center;
             background: #fff;
-            padding: 20px;
+            padding: 30px;
             border-radius: 15px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            width: 80%; /* Reduce the width of the container */
-            max-width: 800px; /* Set a maximum width */
         }
 
         h1 {
@@ -42,7 +40,7 @@
 
         th,
         td {
-            padding: 8px; /* Reduce padding */
+            padding: 12px;
             border: 1px solid #0f0e0e;
             text-align: center;
         }
@@ -94,18 +92,11 @@
             margin-bottom: 10px;
         }
 
-        .radial-gauge-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
-        }
-
         .radial-gauge-wrapper {
             border: 2px solid #ccc;
-            padding: 10px;
+            padding: 20px;
             border-radius: 10px;
-            width: 45%; /* Adjust width to fit two boxes side by side */
-            margin: 0 5px; /* Add margin between the boxes */
+            margin-top: 20px;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -142,7 +133,7 @@
             </tbody>
         </table>
 
-        <canvas id="myChart" width="200" height="100"></canvas>
+        <canvas id="myChart" width="450" height="250"></canvas>
         <h2>E-COURT</h2>
         <div class="progress-wrapper">
             <div class="progress-container">
@@ -155,18 +146,12 @@
             </div>
         </div>
 
-        <div class="radial-gauge-container">
-            <div class="radial-gauge-wrapper">
-                <h2>PERKARA</h2>
-                <img src="{{ radial_chart_url_gugatan }}" alt="Radial Gauge Chart Gugatan">
-                <img src="{{ radial_chart_url_permohonan }}" alt="Radial Gauge Chart Permohonan">
-            </div>
-            <div class="radial-gauge-wrapper">
-                <h2>PERKARA</h2>
-                <img src="{{ radial_chart_url_gugatan }}" alt="Radial Gauge Chart Gugatan">
-                <img src="{{ radial_chart_url_permohonan }}" alt="Radial Gauge Chart Permohonan">
-            </div>
+        <div class="radial-gauge-wrapper">
+            <h2>PERKARA</h2>
+            <img src="{{ radial_chart_url_gugatan }}" alt="Radial Gauge Chart Gugatan">
+            <img src="{{ radial_chart_url_permohonan }}" alt="Radial Gauge Chart Permohonan">
         </div>
+
         <div class="footer">
             &copy; 2024 Statistik Perkara. All rights reserved.
         </div>
