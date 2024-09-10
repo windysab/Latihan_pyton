@@ -95,7 +95,7 @@ def line_chart():
             "datasets": [
                 {
                     "data": [rasio_gugatan],  # Use actual data for Gugatan
-                    "backgroundColor": "green"
+                    "backgroundColor": "red"
                 }
             ]
         }

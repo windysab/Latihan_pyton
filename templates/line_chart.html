@@ -15,7 +15,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 120vh;
+            height: 105vh;
             margin: 0;
         }
 
@@ -108,37 +108,47 @@
 
         .radial-gauge-wrapper {
             border: 2px solid #ccc;
+            /* Menambahkan border dengan ketebalan 2 piksel dan warna abu-abu */
             padding: 10px;
+            /* Menambahkan ruang kosong (padding) sebesar 10 piksel di dalam elemen */
             border-radius: 10px;
+            /* Membuat sudut-sudut elemen menjadi melengkung dengan radius 10 piksel */
             margin-top: 20px;
+            /* Menambahkan jarak sebesar 20 piksel di atas elemen */
             display: flex;
+            /* Mengatur elemen sebagai flex container */
             flex-direction: column;
+            /* Menyusun elemen anak secara vertikal di dalam container */
             align-items: center;
+            /* Menyusun elemen anak di tengah secara horizontal di dalam container */
             width: 100%;
-            /* Ensure the wrapper takes full width */
+            /* Memastikan elemen mengambil lebar penuh dari container induknya */
             box-sizing: border-box;
-            /* Include padding and border in the element's total width and height */
+            /* Memastikan padding dan border termasuk dalam total lebar dan tinggi elemen */
         }
 
         .radial-gauge-images {
             display: flex;
+            /* Mengatur elemen sebagai flex container */
             justify-content: center;
-            gap: 5px;
-            /* Reduce space between the images */
+            /* Menyusun elemen anak secara horizontal di tengah container */
+            gap: 10px;
+            /* Menambahkan jarak sebesar 10 piksel di antara elemen anak */
             width: 100%;
-            /* Ensure the images container takes full width */
+            /* Memastikan elemen mengambil lebar penuh dari container induknya */
             flex-wrap: nowrap;
-            /* Prevent wrapping */
+            /* Mencegah elemen anak untuk membungkus ke baris berikutnya */
         }
 
         .radial-gauge-images img {
-            max-width: 48%;
-            /* Increase the width of the images */
+            max-width: 45%;
+            /* Membatasi lebar maksimum gambar menjadi 45% dari lebar container induknya */
             height: auto;
+            /* Memastikan tinggi gambar disesuaikan secara proporsional dengan lebarnya */
             flex: 1 1 auto;
-            /* Allow images to grow and shrink */
+            /* Mengizinkan gambar untuk tumbuh dan menyusut sesuai dengan ruang yang tersedia */
             box-sizing: border-box;
-            /* Include padding and border in the element's total width and height */
+            /* Memastikan padding dan border termasuk dalam total lebar dan tinggi elemen */
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -190,14 +200,14 @@
 
         <div class="radial-gauge-container">
             <div class="radial-gauge-wrapper">
-                <h2>RASIO PENYELESIAN PERKARA</h2>
+                <h5>RASIO PENYELESIAN PERKARA</h5>
                 <div class="radial-gauge-images">
                     <img src="{{ radial_chart_url_gugatan }}" alt="Radial Gauge Chart Gugatan">
                     <img src="{{ radial_chart_url_permohonan }}" alt="Radial Gauge Chart Permohonan">
                 </div>
             </div>
             <div class="radial-gauge-wrapper">
-                <h2>RASIO PENYELESIAN PERKARA</h2>
+                <h5>BHT</h5>
                 <div class="radial-gauge-images">
                     <img src="{{ radial_chart_url_gugatan }}" alt="Radial Gauge Chart Gugatan">
                     <img src="{{ radial_chart_url_permohonan }}" alt="Radial Gauge Chart Permohonan">
