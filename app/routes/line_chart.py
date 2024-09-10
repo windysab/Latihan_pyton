@@ -127,11 +127,13 @@ def line_chart():
     current_month = calendar.month_name[datetime.now().month]
 
     return render_template(
-        'line_chart.html', 
-        chart_config=chart_config, 
-        current_month=current_month, 
-        progress_bar_url_gugatan=progress_bar_url_gugatan, 
-        progress_bar_url_permohonan=progress_bar_url_permohonan,
-        radial_chart_url_gugatan=radial_chart_url_gugatan,
-        radial_chart_url_permohonan=radial_chart_url_permohonan
-    )
+    'line_chart.html', 
+    chart_config=chart_config, 
+    current_month=current_month, 
+    progress_bar_url_gugatan=progress_bar_url_gugatan, 
+    progress_bar_url_permohonan=progress_bar_url_permohonan,
+    radial_chart_url_gugatan=radial_chart_url_gugatan,
+    radial_chart_url_permohonan=radial_chart_url_permohonan,
+    e_court_gugatan=e_court_gugatan,
+    e_court_permohonan=e_court_permohonan  # Pastikan variabel ini diteruskan
+)
