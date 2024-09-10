@@ -15,7 +15,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 150vh;
+            height: 120vh;
             margin: 0;
         }
 
@@ -25,8 +25,10 @@
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            width: 80%; /* Reduce the width of the container */
-            max-width: 800px; /* Set a maximum width */
+            width: 80%;
+            /* Reduce the width of the container */
+            max-width: 800px;
+            /* Set a maximum width */
         }
 
         h1 {
@@ -42,7 +44,8 @@
 
         th,
         td {
-            padding: 8px; /* Reduce padding */
+            padding: 8px;
+            /* Reduce padding */
             border: 1px solid #0f0e0e;
             text-align: center;
         }
@@ -75,7 +78,8 @@
 
         .progress-wrapper {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
+            /* Center the items */
             margin-top: 20px;
         }
 
@@ -84,6 +88,8 @@
             flex-direction: column;
             align-items: center;
             transition: transform 0.3s ease;
+            margin: 0 10px;
+            /* Add horizontal margin to space out the items */
         }
 
         .progress-container:hover {
@@ -104,8 +110,35 @@
             border: 2px solid #ccc;
             padding: 10px;
             border-radius: 10px;
-            width: 45%; /* Adjust width to fit two boxes side by side */
-            margin: 0 5px; /* Add margin between the boxes */
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            /* Ensure the wrapper takes full width */
+            box-sizing: border-box;
+            /* Include padding and border in the element's total width and height */
+        }
+
+        .radial-gauge-images {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            /* Reduce space between the images */
+            width: 100%;
+            /* Ensure the images container takes full width */
+            flex-wrap: nowrap;
+            /* Prevent wrapping */
+        }
+
+        .radial-gauge-images img {
+            max-width: 48%;
+            /* Increase the width of the images */
+            height: auto;
+            flex: 1 1 auto;
+            /* Allow images to grow and shrink */
+            box-sizing: border-box;
+            /* Include padding and border in the element's total width and height */
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -157,14 +190,18 @@
 
         <div class="radial-gauge-container">
             <div class="radial-gauge-wrapper">
-                <h2>PERKARA</h2>
-                <img src="{{ radial_chart_url_gugatan }}" alt="Radial Gauge Chart Gugatan">
-                <img src="{{ radial_chart_url_permohonan }}" alt="Radial Gauge Chart Permohonan">
+                <h2>RASIO PENYELESIAN PERKARA</h2>
+                <div class="radial-gauge-images">
+                    <img src="{{ radial_chart_url_gugatan }}" alt="Radial Gauge Chart Gugatan">
+                    <img src="{{ radial_chart_url_permohonan }}" alt="Radial Gauge Chart Permohonan">
+                </div>
             </div>
             <div class="radial-gauge-wrapper">
-                <h2>PERKARA</h2>
-                <img src="{{ radial_chart_url_gugatan }}" alt="Radial Gauge Chart Gugatan">
-                <img src="{{ radial_chart_url_permohonan }}" alt="Radial Gauge Chart Permohonan">
+                <h2>RASIO PENYELESIAN PERKARA</h2>
+                <div class="radial-gauge-images">
+                    <img src="{{ radial_chart_url_gugatan }}" alt="Radial Gauge Chart Gugatan">
+                    <img src="{{ radial_chart_url_permohonan }}" alt="Radial Gauge Chart Permohonan">
+                </div>
             </div>
         </div>
         <div class="footer">
