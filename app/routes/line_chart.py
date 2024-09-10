@@ -1,73 +1,84 @@
 from flask import render_template
 from app import app
 from app.utils import load_data, generate_colors
+import calendar
+from datetime import datetime
 from quickchart import QuickChart
 
 @app.route('/line_chart')
 def line_chart():
     table = load_data("dataset2.csv")
-    labels = ['sisa lama', 'masuk', 'putus', 'sisa baru']
+    labels = ['SISA LAMA', 'MASUK', 'PUTUS', 'SISA BARU']
     
     datasets = []
-    for perkara in table['PERKARA']:
+    for index, perkara in enumerate(table['PERKARA']):
         data = table[table['PERKARA'] == perkara][labels].values.flatten().tolist()
+        border_color = 'red' if perkara == 'Gugatan' else 'green' if perkara == 'Permohonan' else generate_colors(1)[0]
         datasets.append({
             "label": perkara,
             "data": data,
             "fill": False,
-            "borderColor": generate_colors(1)[0]
+            "borderColor": border_color
         })
 
-    qc = QuickChart()
-    qc.width = 500
-    qc.height = 300
-    qc.version = '2.9.4'
-    qc.config = {
+    chart_config = {
         "type": "line",
         "data": {
             "labels": labels,
             "datasets": datasets
+        },
+        "options": {
+            "onClick": "function(event, array) { if(array.length > 0) { alert(array[0].element.$context.raw); } }"
         }
     }
 
-    chart_url = qc.get_url()
-    return f'''
-    <html>
-        <head>
-            <title>Line Chart</title>
-            <style>
-                body {{
-                    font-family: Arial, sans-serif;
-                    background-color: #f4f4f9;
-                    color: #333;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 100vh;
-                    margin: 0;
-                }}
-                .container {{
-                    text-align: center;
-                    background: #fff;
-                    padding: 20px;
-                    border-radius: 10px;
-                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                }}
-                h1 {{
-                    color: #444;
-                }}
-                img {{
-                    max-width: 100%;
-                    height: auto;
-                    border-radius: 10px;
-                }}
-            </style>
-        </head>
-        <body>
-            <div class="container">
-                <h1>Line Chart Example</h1>
-                <img src="{chart_url}" alt="Line Chart" />
-            </div>
-        </body>
-    </html>
-    '''
+    # Extract E-Court data from the CSV
+    e_court_gugatan = float(table[table['PERKARA'] == 'Gugatan']['E-COURT'].str.rstrip('%').values[0])
+    e_court_permohonan = float(table[table['PERKARA'] == 'Permohonan']['E-COURT'].str.rstrip('%').values[0])
+
+    # Create QuickChart progress bar for Gugatan
+    qc_gugatan = QuickChart()
+    qc_gugatan.width = 300
+    qc_gugatan.height = 50
+    qc_gugatan.version = '2.9.4'
+    qc_gugatan.config = {
+        "type": "progressBar",
+        "data": {
+            "datasets": [
+                {
+                    "data": [e_court_gugatan],
+                    "backgroundColor": "rgba(204, 33, 33, 0.8)"  # Light red
+                },
+            ],
+        },
+    }
+    progress_bar_url_gugatan = qc_gugatan.get_url()
+
+    # Create QuickChart progress bar for Permohonan
+    qc_permohonan = QuickChart()
+    qc_permohonan.width = 300
+    qc_permohonan.height = 50
+    qc_permohonan.version = '2.9.4'
+    qc_permohonan.config = {
+        "type": "progressBar",
+        "data": {
+            "datasets": [
+                {
+                    "data": [e_court_permohonan],
+                    "backgroundColor": "rgba(45, 160, 45, 0.8)"  # Light green
+                },
+            ],
+        },
+    }
+    progress_bar_url_permohonan = qc_permohonan.get_url()
+
+    # Get current month name
+    current_month = calendar.month_name[datetime.now().month]
+
+    return render_template(
+        'line_chart.html', 
+        chart_config=chart_config, 
+        current_month=current_month, 
+        progress_bar_url_gugatan=progress_bar_url_gugatan, 
+        progress_bar_url_permohonan=progress_bar_url_permohonan
+    )
