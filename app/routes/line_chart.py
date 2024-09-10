@@ -35,6 +35,16 @@ def line_chart():
     # Extract E-Court data from the CSV
     e_court_gugatan = float(table[table['PERKARA'] == 'Gugatan']['E-COURT'].str.rstrip('%').values[0])
     e_court_permohonan = float(table[table['PERKARA'] == 'Permohonan']['E-COURT'].str.rstrip('%').values[0])
+    
+    # Menghitung rasio penyelesaian perkara
+    # jumlah_gugatan = float(table[table['PERKARA'] == 'Gugatan']['MASUK'].values[0]) 
+    # jumlah_gugatan_putus = float(table[table['PERKARA'] == 'Gugatan']['PUTUS'].values[0])
+    # rasio_gugatan = jumlah_gugatan_putus / jumlah_gugatan * 100
+    
+
+    # jumlah_permohonan = float(table[table['PERKARA'] == 'Permohonan']['MASUK'].values[0])
+    # jumlah_permohonan_putus = float(table[table['PERKARA'] == 'Permohonan']['PUTUS'].values[0])
+    # rasio_permohonan = jumlah_permohonan_putus / jumlah_permohonan * 100
 
     # Create QuickChart progress bar for Gugatan
     qc_gugatan = QuickChart()
@@ -73,6 +83,8 @@ def line_chart():
     progress_bar_url_permohonan = qc_permohonan.get_url()
 
     # Generate a radial gauge chart for Gugatan using QuickChart
+    rasio_gugatan = float(table[table['PERKARA'] == 'Gugatan']['PUTUS'].values[0]) / float(table[table['PERKARA'] == 'Gugatan']['MASUK'].values[0]) * 100
+    
     qc_radial_gugatan = QuickChart()
     qc_radial_gugatan.width = 300
     qc_radial_gugatan.height = 100
@@ -82,7 +94,7 @@ def line_chart():
         "data": {
             "datasets": [
                 {
-                    "data": [e_court_gugatan],  # Use actual data for Gugatan
+                    "data": [rasio_gugatan],  # Use actual data for Gugatan
                     "backgroundColor": "green"
                 }
             ]
@@ -92,6 +104,7 @@ def line_chart():
     qc_radial_gugatan.to_file('mychart_gugatan.png')
 
     # Generate a radial gauge chart for Permohonan using QuickChart
+    rasio_permohonan = float(table[table['PERKARA'] == 'Permohonan']['PUTUS'].values[0]) / float(table[table['PERKARA'] == 'Permohonan']['MASUK'].values[0]) * 100
     qc_radial_permohonan = QuickChart()
     qc_radial_permohonan.width = 300
     qc_radial_permohonan.height = 100
@@ -101,7 +114,7 @@ def line_chart():
         "data": {
             "datasets": [
                 {
-                    "data": [e_court_permohonan],  # Use actual data for Permohonan
+                    "data": [rasio_permohonan] ,  # Use actual data for Permohonan
                     "backgroundColor": "green"
                 }
             ]
