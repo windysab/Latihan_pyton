@@ -205,6 +205,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="footer">
             &copy; 2024 Statistik Perkara. All rights reserved.
         </div>
@@ -250,6 +251,15 @@
         };
         const ctx = document.getElementById('myChart').getContext('2d');
         new Chart(ctx, config);
+    </script>
+    <script>
+        document.querySelectorAll('.progress-container').forEach(container => {
+            container.addEventListener('mouseover', function() {
+                const value = this.getAttribute('data-value');
+                const valueElement = this.querySelector('.progress-value');
+                valueElement.textContent = `${value}%`;
+            });
+        });
     </script>
 </body>
 </html>
