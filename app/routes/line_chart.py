@@ -72,6 +72,44 @@ def line_chart():
     }
     progress_bar_url_permohonan = qc_permohonan.get_url()
 
+    # Generate a radial gauge chart for Gugatan using QuickChart
+    qc_radial_gugatan = QuickChart()
+    qc_radial_gugatan.width = 300
+    qc_radial_gugatan.height = 100
+    qc_radial_gugatan.version = '2.9.4'
+    qc_radial_gugatan.config = {
+        "type": "radialGauge",
+        "data": {
+            "datasets": [
+                {
+                    "data": [e_court_gugatan],  # Use actual data for Gugatan
+                    "backgroundColor": "green"
+                }
+            ]
+        }
+    }
+    radial_chart_url_gugatan = qc_radial_gugatan.get_url()
+    qc_radial_gugatan.to_file('mychart_gugatan.png')
+
+    # Generate a radial gauge chart for Permohonan using QuickChart
+    qc_radial_permohonan = QuickChart()
+    qc_radial_permohonan.width = 300
+    qc_radial_permohonan.height = 100
+    qc_radial_permohonan.version = '2.9.4'
+    qc_radial_permohonan.config = {
+        "type": "radialGauge",
+        "data": {
+            "datasets": [
+                {
+                    "data": [e_court_permohonan],  # Use actual data for Permohonan
+                    "backgroundColor": "green"
+                }
+            ]
+        }
+    }
+    radial_chart_url_permohonan = qc_radial_permohonan.get_url()
+    qc_radial_permohonan.to_file('mychart_permohonan.png')
+
     # Get current month name
     current_month = calendar.month_name[datetime.now().month]
 
@@ -80,5 +118,7 @@ def line_chart():
         chart_config=chart_config, 
         current_month=current_month, 
         progress_bar_url_gugatan=progress_bar_url_gugatan, 
-        progress_bar_url_permohonan=progress_bar_url_permohonan
+        progress_bar_url_permohonan=progress_bar_url_permohonan,
+        radial_chart_url_gugatan=radial_chart_url_gugatan,
+        radial_chart_url_permohonan=radial_chart_url_permohonan
     )

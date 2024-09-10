@@ -90,6 +90,13 @@
         .progress-container img {
             margin-left: 10px;
         }
+
+        .radial-gauge-wrapper {
+            border: 2px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -125,7 +132,7 @@
             </tbody>
         </table>
 
-        <canvas id="myChart" width="800" height="600"></canvas>
+        <canvas id="myChart" width="500" height="300"></canvas>
         <h2>E-COURT</h2>
         <div class="progress-wrapper">
             <div class="progress-container">
@@ -136,6 +143,12 @@
                 <span>Permohonan</span>
                 <img src="{{ progress_bar_url_permohonan }}" alt="Progress Bar Permohonan" />
             </div>
+        </div>
+
+        <div class="radial-gauge-wrapper">
+            <h2>PERKARA</h2>
+            <img src="{{ radial_chart_url_gugatan }}" alt="Radial Gauge Chart Gugatan">
+            <img src="{{ radial_chart_url_permohonan }}" alt="Radial Gauge Chart Permohonan">
         </div>
         <div class="footer">
             &copy; 2024 Statistik Perkara. All rights reserved.
