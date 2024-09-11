@@ -117,6 +117,9 @@ def line_chart():
     # Get current month name
     current_month = calendar.month_name[datetime.now().month]
 
+    bht_g = table[table['PERKARA'] == 'Gugatan']['BHT'].values[0]
+    bht_p = table[table['PERKARA'] == 'Permohonan']['BHT'].values[0]
+
     return render_template(
     'line_chart.html', 
     chart_config=chart_config, 
@@ -126,5 +129,7 @@ def line_chart():
     radial_chart_url_gugatan=radial_chart_url_gugatan,
     radial_chart_url_permohonan=radial_chart_url_permohonan,
     e_court_gugatan=e_court_gugatan,
-    e_court_permohonan=e_court_permohonan  # Pastikan variabel ini diteruskan
+    e_court_permohonan=e_court_permohonan,  # Pastikan variabel ini diteruskan
+    bht_g=bht_g,
+    bht_p=bht_p
 )
