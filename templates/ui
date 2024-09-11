@@ -36,6 +36,7 @@
             from {
                 opacity: 0;
             }
+
             to {
                 opacity: 1;
             }
@@ -160,27 +161,47 @@
 
         .radial-gauge-wrapper {
             border: 2px solid #aa0404;
-            padding: 10px;
-            border-radius: 10px;
+            padding: 20px;
+            border-radius: 15px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: calc(50% - 20px);
+            width: 100%;
             box-sizing: border-box;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .radial-gauge-wrapper:hover {
+            transform: scale(1.05);
         }
 
         .radial-gauge-images {
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            gap: 10px;
+            gap: 20px;
             width: 100%;
+            margin-top: 20px;
         }
 
-        .radial-gauge-images img {
-            max-width: 100%;
+        .radial-gauge-image-container {
+            border: 2px solid #444;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .radial-gauge-image-container:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .radial-gauge-image-container img {
+            display: block;
+            width: 100%;
             height: auto;
-            box-sizing: border-box;
         }
 
         .circle-container {
@@ -301,8 +322,12 @@
             <div class="radial-gauge-wrapper">
                 <h4>RASIO PENYELESIAN PERKARA</h4>
                 <div class="radial-gauge-images">
-                    <img src="{{ radial_chart_url_gugatan }}" alt="Radial Gauge Chart Gugatan">
-                    <img src="{{ radial_chart_url_permohonan }}" alt="Radial Gauge Chart Permohonan">
+                    <div class="radial-gauge-image-container">
+                        <img src="{{ radial_chart_url_gugatan }}" alt="Radial Gauge Chart Gugatan">
+                    </div>
+                    <div class="radial-gauge-image-container">
+                        <img src="{{ radial_chart_url_permohonan }}" alt="Radial Gauge Chart Permohonan">
+                    </div>
                 </div>
             </div>
             <div class="radial-gauge-wrapper">

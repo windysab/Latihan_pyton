@@ -54,39 +54,27 @@
 
         th,
         td {
-            padding: 12px;
+            padding: 8px;
             border: 1px solid #0f0e0e;
             text-align: center;
-            border-radius: 8px;
         }
 
         th {
-            background: linear-gradient(135deg, #4646a3, #8e8e93);
+            background: linear-gradient(135deg, #b4b4b9, #8e8e93);
             font-weight: bold;
             color: #fff;
         }
 
-        tr:nth-child(even) {
-            background-color: #02961a;
-        }
-
-        tr:nth-child(odd) {
-            background-color: #8b0a0a;
-        }
-
         tr:hover {
-            background-color: #d1e7dd;
-            transition: background-color 0.3s ease;
+            background-color: #f1f1f1;
         }
 
         .gugatan {
             background-color: #cc2121;
-            color: #fff;
         }
 
         .permohonan {
             background-color: #2da02d;
-            color: #fff;
         }
 
         .footer {
@@ -114,40 +102,24 @@
             transform: scale(1.05);
         }
 
-        .progress-bar {
-            width: 300px;
-            height: 30px;
-            background-color: #1b025e;
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-bar.gugatan::before {
-            content: '';
-            display: block;
-            height: 100%;
-            background-color: #b10716;
-            width: var(--progress);
-            transition: width 0.3s ease;
-        }
-
-        .progress-bar.permohonan::before {
-            content: '';
-            display: block;
-            height: 100%;
-            background-color: #2da02d;
-            width: var(--progress);
-            transition: width 0.3s ease;
+        .progress-container img {
+            margin-bottom: 10px;
         }
 
         .progress-value {
+            display: none;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
             color: #fff;
-            font-weight: bold;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .progress-container:hover .progress-value {
+            display: block;
         }
 
         .radial-gauge-container {
@@ -234,14 +206,6 @@
         .circle-value {
             display: inline-block;
         }
-
-        .chart-container {
-            border: 2px solid #444;
-            border-radius: 10px;
-            padding: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -277,23 +241,18 @@
             </tbody>
         </table>
 
-        <div class="chart-container">
-            <canvas id="myChart" width="200" height="100"></canvas>
-        </div>
-
+        <canvas id="myChart" width="200" height="100"></canvas>
         <h2>E-COURT</h2>
         <div class="progress-wrapper">
             <div class="progress-container" data-value="{{ e_court_gugatan }}">
-                <div class="progress-bar gugatan" style="--progress: {{ e_court_gugatan }}%;">
-                    <span class="progress-value">{{ e_court_gugatan }}%</span>
-                </div>
+                <img src="{{ progress_bar_url_gugatan }}" alt="Progress Bar Gugatan" />
                 <span>Gugatan</span>
+                <span class="progress-value">{{ e_court_gugatan }}%</span>
             </div>
             <div class="progress-container" data-value="{{ e_court_permohonan }}">
-                <div class="progress-bar permohonan" style="--progress: {{ e_court_permohonan }}%;">
-                    <span class="progress-value">{{ e_court_permohonan }}%</span>
-                </div>
+                <img src="{{ progress_bar_url_permohonan }}" alt="Progress Bar Permohonan" />
                 <span>Permohonan</span>
+                <span class="progress-value">{{ e_court_permohonan }}%</span>
             </div>
         </div>
 
