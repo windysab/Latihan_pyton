@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,8 +10,8 @@
 
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #f4f4f9, #e0e0e0);
-            color: #333;
+            background: linear-gradient(135deg, #23ad5d, #81b9b7);
+            color: #0a0404;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -39,7 +40,8 @@
             margin-bottom: 20px;
         }
 
-        th, td {
+        th,
+        td {
             padding: 8px;
             border: 1px solid #0f0e0e;
             text-align: center;
@@ -110,39 +112,113 @@
 
         .radial-gauge-container {
             display: flex;
-            justify-content: space-between;
-            margin-top: 10px;
+            flex-wrap: wrap;
+            /* Allow wrapping if necessary */
+            gap: 20px;
+            /* Add space between the boxes */
+            justify-content: center;
+            /* Center the boxes */
+            margin-top: 20px;
         }
 
         .radial-gauge-wrapper {
-            border: 2px solid #ccc;
+            border: 2px solid #aa0404;
             padding: 10px;
             border-radius: 10px;
-            margin-top: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
+            width: calc(50% - 20px);
+            /* Adjust width to fit two boxes side by side with gap */
             box-sizing: border-box;
+            /* Include padding and border in the element's total width and height */
+
         }
 
         .radial-gauge-images {
             display: flex;
+            flex-direction: column;
+            /* Arrange images vertically */
             justify-content: center;
             gap: 10px;
+            /* Adjust space between the images */
             width: 100%;
-            flex-wrap: nowrap;
+            /* Ensure the images container takes full width */
         }
 
         .radial-gauge-images img {
-            max-width: 45%;
+            max-width: 100%;
+            /* Ensure images do not exceed the container's width */
             height: auto;
-            flex: 1 1 auto;
             box-sizing: border-box;
+            /* Include padding and border in the element's total width and height */
+        }
+
+        .circle-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Center the circles horizontally */
+            gap: 10px;
+            /* Add space between the circles */
+            margin-top: 20px;
+        }
+
+        .circle {
+            width: 100px;
+            /* Set the width of the circle */
+            height: 100px;
+            /* Set the height of the circle */
+            border-radius: 50%;
+            /* Make the element a circle */
+            background-color: #ad050e;
+            /* Set the background color of the circle */
+            display: flex;
+            justify-content: center;
+            /* Center the value horizontally */
+            align-items: center;
+            /* Center the value vertically */
+            color: white;
+            /* Set the text color */
+            font-size: 20px;
+            /* Set the font size */
+            font-weight: bold;
+            /* Make the text bold */
+            position: relative;
+            left: -20px; /* Shift the circle slightly to the left */
+        }
+
+        .circle1 {
+            width: 100px;
+            /* Set the width of the circle */
+            height: 100px;
+            /* Set the height of the circle */
+            border-radius: 50%;
+            /* Make the element a circle */
+            background-color: #4caf50;
+            /* Set the background color of the circle */
+            display: flex;
+            justify-content: center;
+            /* Center the value horizontally */
+            align-items: center;
+            /* Center the value vertically */
+            color: white;
+            /* Set the text color */
+            font-size: 20px;
+            /* Set the font size */
+            font-weight: bold;
+            /* Make the text bold */
+            position: relative;
+            left: 20px; /* Shift the circle slightly to the right */
+        }
+
+        .circle-value {
+            display: inline-block;
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
     <div class="container">
         <h1>Statistik Perkara Bulan {{ current_month }}</h1>
@@ -191,21 +267,25 @@
 
         <div class="radial-gauge-container">
             <div class="radial-gauge-wrapper">
-                <h5>RASIO PENYELESIAN PERKARA</h5>
+                <h4>RASIO PENYELESIAN PERKARA</h4>
                 <div class="radial-gauge-images">
                     <img src="{{ radial_chart_url_gugatan }}" alt="Radial Gauge Chart Gugatan">
                     <img src="{{ radial_chart_url_permohonan }}" alt="Radial Gauge Chart Permohonan">
                 </div>
             </div>
             <div class="radial-gauge-wrapper">
-                <h5>BHT</h5>
-                <div class="radial-gauge-images">
-                    <img src="{{ radial_chart_url_gugatan }}" alt="Radial Gauge Chart Gugatan">
-                    <img src="{{ radial_chart_url_permohonan }}" alt="Radial Gauge Chart Permohonan">
+                <h4>BHT</h4>
+                <div class="circle-container">
+                    <div class="circle">
+                        <span class="circle-value">{{ value1 }}%</span>
+                    </div>
+                    <div class="circle1">
+                        <span class="circle-value">{{ value2 }}%</span>
+                    </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="footer">
             &copy; 2024 Statistik Perkara. All rights reserved.
         </div>
@@ -254,12 +334,14 @@
     </script>
     <script>
         document.querySelectorAll('.progress-container').forEach(container => {
-            container.addEventListener('mouseover', function() {
+            container.addEventListener('mouseover', function () {
                 const value = this.getAttribute('data-value');
                 const valueElement = this.querySelector('.progress-value');
                 valueElement.textContent = `${value}%`;
             });
         });
     </script>
+
 </body>
+
 </html>

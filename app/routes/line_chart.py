@@ -36,16 +36,7 @@ def line_chart():
     e_court_gugatan = float(table[table['PERKARA'] == 'Gugatan']['E-COURT'].str.rstrip('%').values[0])
     e_court_permohonan = float(table[table['PERKARA'] == 'Permohonan']['E-COURT'].str.rstrip('%').values[0])
     
-    # Menghitung rasio penyelesaian perkara
-    # jumlah_gugatan = float(table[table['PERKARA'] == 'Gugatan']['MASUK'].values[0]) 
-    # jumlah_gugatan_putus = float(table[table['PERKARA'] == 'Gugatan']['PUTUS'].values[0])
-    # rasio_gugatan = jumlah_gugatan_putus / jumlah_gugatan * 100
     
-
-    # jumlah_permohonan = float(table[table['PERKARA'] == 'Permohonan']['MASUK'].values[0])
-    # jumlah_permohonan_putus = float(table[table['PERKARA'] == 'Permohonan']['PUTUS'].values[0])
-    # rasio_permohonan = jumlah_permohonan_putus / jumlah_permohonan * 100
-
     # Create QuickChart progress bar for Gugatan
     qc_gugatan = QuickChart()
     qc_gugatan.width = 300
@@ -101,7 +92,7 @@ def line_chart():
         }
     }
     radial_chart_url_gugatan = qc_radial_gugatan.get_url()
-    qc_radial_gugatan.to_file('mychart_gugatan.png')
+    # qc_radial_gugatan.to_file('mychart_gugatan.png')
 
     # Generate a radial gauge chart for Permohonan using QuickChart
     rasio_permohonan = float(table[table['PERKARA'] == 'Permohonan']['PUTUS'].values[0]) / float(table[table['PERKARA'] == 'Permohonan']['MASUK'].values[0]) * 100
@@ -121,7 +112,7 @@ def line_chart():
         }
     }
     radial_chart_url_permohonan = qc_radial_permohonan.get_url()
-    qc_radial_permohonan.to_file('mychart_permohonan.png')
+    # qc_radial_permohonan.to_file('mychart_permohonan.png')
 
     # Get current month name
     current_month = calendar.month_name[datetime.now().month]
